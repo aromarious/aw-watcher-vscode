@@ -40,6 +40,55 @@ TODO:
 * `aw-watcher-vscode.enable`: enable/disable this extension
 -->
 
+## For Developers
+
+### Prerequisites
+
+- Node.js v23.10.0 or higher
+- pnpm 9.15.0 or higher
+- ActivityWatch server running (for testing)
+
+### Setup
+
+```bash
+# Install dependencies
+pnpm install
+
+# Compile TypeScript
+pnpm run compile
+```
+
+### Development
+
+```bash
+# Watch mode (auto-compile on file changes)
+pnpm run watch
+
+# Run linter
+pnpm run check
+
+# Format code
+pnpm run format
+```
+
+### Testing
+
+```bash
+# Run all tests
+pnpm test
+```
+
+### Build and Package
+
+```bash
+# Build for production
+pnpm run vscode:prepublish
+
+# Package as .vsix file
+# (requires vsce tool)
+vsce package
+```
+
 ## Error reporting
 
 If you run into any errors or have feature requests, please [open an issue](https://github.com/ActivityWatch/aw-watcher-vscode).
