@@ -1,71 +1,76 @@
 {
-    "name": "aw-watcher-vscode",
-    "displayName": "aw-watcher-vscode",
-    "description": "Editor watcher for ActivityWatch, the free and open-source automated time tracker.",
-    "version": "0.5.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ActivityWatch/aw-watcher-vscode"
-    },
-    "publisher": "activitywatch",
-    "author": "ActivityWatch Developers",
-    "bugs": {
-        "url": "https://github.com/ActivityWatch/aw-watcher-vscode/issues"
-    },
-    "engines": {
-        "vscode": "^1.23.0"
-    },
-    "categories": [
-        "Other"
+  "name": "aw-watcher-vscode",
+  "displayName": "aw-watcher-vscode",
+  "description": "Editor watcher for ActivityWatch, the free and open-source automated time tracker.",
+  "version": "0.5.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ActivityWatch/aw-watcher-vscode"
+  },
+  "publisher": "activitywatch",
+  "author": "ActivityWatch Developers",
+  "bugs": {
+    "url": "https://github.com/ActivityWatch/aw-watcher-vscode/issues"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "multi-root ready"
+  ],
+  "icon": "media/logo/logo.png",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.reload",
+        "title": "Reload ActivityWatch"
+      }
     ],
-    "keywords": [
-        "multi-root ready"
-    ],
-    "icon": "media/logo/logo.png",
-    "activationEvents": [
-        "*"
-    ],
-    "extensionKind": [
-        "ui"
-    ],
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.reload",
-                "title": "Reload ActivityWatch"
-            }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "aw-watcher-vscode extension configuration",
-            "properties": {
-                "aw-watcher-vscode.maxHeartbeatsPerSec": {
-                    "type": "number",
-                    "default": 1,
-                    "description": "Controls the maximum number of hearbeats sent per second."
-                }
-            }
+    "configuration": {
+      "type": "object",
+      "title": "aw-watcher-vscode extension configuration",
+      "properties": {
+        "aw-watcher-vscode.maxHeartbeatsPerSec": {
+          "type": "number",
+          "default": 1,
+          "description": "Controls the maximum number of hearbeats sent per second."
         }
-    },
-    "scripts": {
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test",
-        "test:mocha": "npm run compile && node ./node_modules/mocha/bin/mocha ./out/test/extension.test.js",
-        "vscode:prepublish": "npm run compile"
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.48",
-        "@types/node": "^25.2.3",
-        "mocha": "^11.7.5",
-        "tslint": "^5.20.1",
-        "typescript": "^5.9.3",
-        "vscode": "^1.1.37"
-    },
-    "dependencies": {
-        "aw-client": "^0.4.1"
-    },
-    "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "npm run compile && node ./node_modules/mocha/bin/mocha ./out/src/test/extension.test.js",
+    "test:mocha": "npm run compile && node ./node_modules/mocha/bin/mocha ./out/src/test/extension.test.js",
+    "vscode:prepublish": "npm run compile",
+    "lint": "biome check --write .",
+    "format": "biome format --write .",
+    "check": "biome check ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.14",
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^25.2.3",
+    "@types/sinon": "^21.0.0",
+    "mocha": "^11.7.5",
+    "sinon": "^21.0.1",
+    "typescript": "^5.9.3",
+    "ultracite": "^7.1.5",
+    "vscode": "^1.1.37"
+  },
+  "dependencies": {
+    "aw-client": "^0.4.1"
+  },
+  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }
