@@ -3,3 +3,5 @@ node_modules
 *.vsix
 out
 src/resources_old
+/test/*.js
+package-lock.json

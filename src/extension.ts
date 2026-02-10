@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the necessary extensibility types to use in your code below
 import { Disposable, ExtensionContext, commands, window, workspace, Uri, Extension, extensions } from 'vscode';
-import { AWClient, IAppEditorEvent } from '../aw-client-js/src/aw-client';
+import { AWClient, IAppEditorEvent } from 'aw-client';
 import { hostname } from 'os';
 import { API, GitExtension } from './git';
 
