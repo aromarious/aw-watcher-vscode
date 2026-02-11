@@ -16,8 +16,10 @@ argument-hint: "[issue番号 または タスク内容]"
 
 引数が数字（例: `123`）の場合、GitHub issue として扱う。
 
+**重要**: このプロジェクトは fork なので、基本的に fork 側（aromarious/aw-watcher-vscode）の issue を参照する。
+
 ```bash
-gh issue view <ISSUE_NUMBER>
+gh issue view <ISSUE_NUMBER> --repo aromarious/aw-watcher-vscode
 ```
 
 - issue のタイトル、本文、ラベルを確認する
@@ -27,24 +29,24 @@ gh issue view <ISSUE_NUMBER>
 
 ### 1. 現在のブランチを確認する
 
-現在のブランチ名を取得し、必要に応じて `develop` に切り替える。
+現在のブランチ名を取得し、必要に応じて `main` に切り替える。
 
 ```bash
 git branch --show-current
 ```
 
-- `develop` でない場合は、`develop` に切り替える
+- `main` でない場合は、`main` に切り替える
 
 ```bash
-git checkout develop
+git checkout main
 ```
 
-### 2. develop ブランチを最新にする
+### 2. main ブランチを最新にする
 
 リモートから最新の変更を取得する。
 
 ```bash
-git pull origin develop
+git pull origin main
 ```
 
 ### 3. ブランチ名を決定する
@@ -86,16 +88,18 @@ git commit --allow-empty -m "wip: start implementation"
 git push -u origin <BRANCH_NAME>
 ```
 
-### 7. `develop` ブランチに向けたドラフト PR を作成する
+### 7. `main` ブランチに向けたドラフト PR を作成する
 
 ドラフト PR を作成する。これによりレビュー待ちにならないようにする。
+
+**重要**: このプロジェクトは fork なので、fork 側（aromarious/aw-watcher-vscode）を明示的に指定する。
 
 - issue 番号が指定された場合:
   - PR タイトル: `WIP: <issue のタイトル>`
   - PR 本文: issue 番号へのリンクと簡単な説明を含める
 
 ```bash
-gh pr create --base develop --draft --title "WIP: <TASK_NAME>" --body "$(cat <<'EOF'
+gh pr create --repo aromarious/aw-watcher-vscode --base main --draft --title "WIP: <TASK_NAME>" --body "$(cat <<'EOF'
 Closes #<ISSUE_NUMBER>
 
 <issue の概要>
@@ -110,7 +114,7 @@ EOF
   - 本文は「作業中」とする
 
 ```bash
-gh pr create --base develop --draft --title "WIP: <TASK_NAME>" --body "$(cat <<'EOF'
+gh pr create --repo aromarious/aw-watcher-vscode --base main --draft --title "WIP: <TASK_NAME>" --body "$(cat <<'EOF'
 作業中
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
