@@ -8,12 +8,37 @@ import {
   Disposable,
   type Extension,
   type ExtensionContext,
+  env,
   extensions,
   type Uri,
   window,
   workspace,
 } from "vscode"
 import type { API, GitExtension } from "./git"
+
+// アプリ名をバケット名用の省略形に変換
+function getAppShortName(appName: string): string {
+  // ユーザー設定の bucketSuffix を確認
+  const config = workspace.getConfiguration("aw-watcher-vscode")
+  const bucketSuffix = config.get<string>("bucketSuffix")
+
+  // bucketSuffix が設定されていればそれを優先
+  if (bucketSuffix && bucketSuffix.trim() !== "") {
+    return bucketSuffix
+  }
+
+  // デフォルトマッピング
+  const defaultMapping: Record<string, string> = {
+    "Visual Studio Code": "vscode",
+    "Visual Studio Code - Insiders": "vscode-insiders",
+    Cursor: "cursor",
+    Windsurf: "windsurf",
+    Antigravity: "antigravity",
+  }
+
+  // 優先順位: デフォルト > 自動変換
+  return defaultMapping[appName] || appName.toLowerCase().replace(/\s+/g, "-")
+}
 
 // This method is called when your extension is activated. Activation is
 // controlled by the activation events defined in package.json.
@@ -30,6 +55,19 @@ export function activate(context: ExtensionContext) {
     controller.init()
   )
   context.subscriptions.push(reloadCommand)
+
+  // Command:Show App Name
+  const showAppNameCommand = commands.registerCommand(
+    "extension.showAppName",
+    () => {
+      const appName = env.appName
+      const shortName = getAppShortName(appName)
+      window.showInformationMessage(
+        `App Name: "${appName}"\nBucket suffix: "${shortName}"`
+      )
+    }
+  )
+  context.subscriptions.push(showAppNameCommand)
 }
 
 export class ActivityWatch {
@@ -54,10 +92,11 @@ export class ActivityWatch {
   private _lastBranch = ""
 
   constructor() {
+    const appShortName = getAppShortName(env.appName)
     this._bucket = {
       id: "",
       hostName: hostname(),
-      clientName: "aw-watcher-vscode",
+      clientName: `aw-watcher-vscode-${appShortName}`,
       eventType: "app.editor.activity",
     }
     this._bucket.id = `${this._bucket.clientName}_${this._bucket.hostName}`
