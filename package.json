@@ -34,10 +34,6 @@
       {
         "command": "extension.reload",
         "title": "Reload ActivityWatch"
-      },
-      {
-        "command": "extension.showAppName",
-        "title": "Show ActivityWatch App Name"
       }
     ],
     "configuration": {

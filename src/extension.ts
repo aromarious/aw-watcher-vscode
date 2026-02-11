@@ -55,19 +55,6 @@ export function activate(context: ExtensionContext) {
     controller.init()
   )
   context.subscriptions.push(reloadCommand)
-
-  // Command:Show App Name
-  const showAppNameCommand = commands.registerCommand(
-    "extension.showAppName",
-    () => {
-      const appName = env.appName
-      const shortName = getAppShortName(appName)
-      window.showInformationMessage(
-        `App Name: "${appName}"\nBucket suffix: "${shortName}"`
-      )
-    }
-  )
-  context.subscriptions.push(showAppNameCommand)
 }
 
 export class ActivityWatch {
