@@ -156,6 +156,11 @@ export class ActivityWatch {
       return
     }
 
+    // アクティブなテキストエディタがない場合は何もしない
+    if (!window.activeTextEditor) {
+      return
+    }
+
     // Create and send heartbeat
     try {
       const heartbeat = this._createHeartbeat()
