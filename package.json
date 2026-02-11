@@ -28,7 +28,7 @@
   "extensionKind": [
     "ui"
   ],
-  "main": "./out/src/extension",
+  "main": "./out/extension",
   "contributes": {
     "commands": [
       {
@@ -44,6 +44,12 @@
           "type": "number",
           "default": 1,
           "description": "Controls the maximum number of hearbeats sent per second."
+        },
+        "aw-watcher-vscode.bucketSuffix": {
+          "type": "string",
+          "default": "",
+          "scope": "application",
+          "description": "バケット名のサフィックス (aw-watcher-vscode-{ここ}_{hostname}) を直接指定します。空の場合は、アプリ名から自動的に生成されます。"
         }
       }
     }
