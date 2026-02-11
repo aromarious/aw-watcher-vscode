@@ -40,5 +40,16 @@ jobs:
       - name: Setup Node.js and pnpm
         uses: ./.github/actions/setup
 
+      - name: Debug - Check directory structure
+        run: |
+          echo "=== Checking out directory ==="
+          ls -la out/ || echo "out/ does not exist"
+          echo "=== Running compile ==="
+          pnpm run compile
+          echo "=== After compile ==="
+          ls -la out/
+          ls -la out/src/ || echo "out/src/ does not exist"
+          ls -la out/src/test/ || echo "out/src/test/ does not exist"
+
       - name: Test
         run: pnpm test
