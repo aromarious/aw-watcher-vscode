@@ -9,30 +9,22 @@ permissions:
   contents: write
 
 jobs:
+  ci:
+    name: Run CI
+    uses: ./.github/workflows/ci.yml
+
   release:
+    name: Build & Release
     runs-on: ubuntu-latest
+    needs: ci
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "23"
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Run tests
-        run: pnpm test
+      - name: Setup Node.js and pnpm
+        uses: ./.github/actions/setup
 
       - name: Install vsce
         run: pnpm add -g @vscode/vsce

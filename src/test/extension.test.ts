@@ -93,7 +93,7 @@ describe("Extension Test Suite", () => {
   describe("activate", () => {
     it("test_activate_正常系_拡張機能が初期化されコマンドが登録される", () => {
       // Arrange: モックコンテキストを準備
-      // @ts-ignore - 将来の実装で使用される
+      // @ts-expect-error - 将来の実装で使用される
       const _mockContext: Partial<ExtensionContext> = {
         subscriptions: [],
       }
@@ -613,7 +613,7 @@ describe("Extension Test Suite", () => {
 
     it("test_handleError_正常系_非クリティカルエラーは警告のみ", () => {
       // Arrange: 警告メッセージを準備（console.warnでログ出力される想定）
-      // @ts-ignore - 将来の実装で使用される
+      // @ts-expect-error - 将来の実装で使用される
       const _warningMessage = "Non-critical warning"
 
       // Act: 非クリティカルエラーをハンドリング（エラーダイアログは表示しない）

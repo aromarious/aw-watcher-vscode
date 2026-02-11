@@ -51,8 +51,8 @@
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "npm run compile && node ./node_modules/mocha/bin/mocha ./out/src/test/extension.test.js",
-    "test:mocha": "npm run compile && node ./node_modules/mocha/bin/mocha ./out/src/test/extension.test.js",
+    "test": "npm run compile && node ./node_modules/mocha/bin/mocha ./out/test/extension.test.js",
+    "test:mocha": "npm run compile && node ./node_modules/mocha/bin/mocha ./out/test/extension.test.js",
     "vscode:prepublish": "npm run compile",
     "lint": "biome check --write .",
     "format": "biome format --write .",
